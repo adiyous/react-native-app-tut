@@ -7,8 +7,35 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 
+// class App extends React.component {
+const App: () => React$Node = () => {
+  //render() {
+    return (
+      <View style={styles.container}>
+        <StatusBar hidden={true} />
+        <Text style={styles.defaultText}>
+          Sierra
+        </Text>
+        <Text style={[
+          styles.defaultText, 
+          styles.selectedText ]}>Tanner</Text>
+        <Text style={styles.defaultText}>Travis</Text>
+        <Text>.</Text>
+      </View>
+    )
+  //}
+}
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: '#DDD'
+  },
   defaultText: {
+    textAlign: 'center',
     fontSize: 22,
     padding: 10,
     margin: 5,
@@ -21,25 +48,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
-
-// class App extends React.component {
-const App: () => React$Node = () => {
-  //render() {
-    return (
-      <View>
-        <StatusBar hidden={true} />
-        <Text style={[
-                styles.defaultText,
-                styles.selectedText
-              ]}>
-                  Sierra
-        </Text>
-        <Text style={styles.defaultText}>Tanner</Text>
-        <Text style={styles.defaultText}>Travis</Text>
-      </View>
-    )
-  //}
-}
 
 export default App
 // AppRegistry.registerComponent('SampleApp', () => App)
