@@ -6,7 +6,8 @@ import {
   StatusBar,
   StyleSheet,
   TouchableWithoutFeedback,
-  ScrollView
+  ScrollView,
+  TouchableHighlight
 } from 'react-native'
 
 import picSierra from './assets/Sierra-Spencer.png'
@@ -57,6 +58,18 @@ export default class App extends React.Component {
           }>
             Red
         </Text>
+        <TouchableHighlight 
+          style={styles.button}
+          onPress={() => this.handleChange('yellow')}
+          underlayColor='orange'>
+        <View style={styles.row}>
+          <View style={[
+            styles.sample,
+            {backgroundColor: 'yellow'}
+            ]} />
+          <Text style={styles.text}>yellow</Text>
+        </View>
+        </TouchableHighlight>
       </View>
       </ScrollView>
     )
@@ -78,7 +91,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     alignSelf: 'stretch',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: 'rgba(255,255,255,.8)'
   },
   pic: {
     borderRadius: 50,
@@ -95,6 +109,21 @@ const styles = StyleSheet.create({
     color: 'blue',
     backgroundColor: 'yellow',
     fontWeight: 'bold'
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: "center"
+  },
+  sample: {
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    margin: 5,
+    backgroundColor: 'white'
+  },
+  text: {
+    fontSize: 30,
+    margin: 5
   }
 })
 
