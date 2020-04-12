@@ -7,8 +7,10 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
+  ListView
 } from 'react-native'
+import ColorButton from './components/ColorButton'
 
 import picSierra from './assets/Sierra-Spencer.png'
 import picTanner from './assets/Tanner-McTab.png'
@@ -17,8 +19,16 @@ export default class App extends React.Component {
 //const App: () => React$Node = () => {
   constructor(){
     super()
+    this.ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    })
+    const availableColors = [
+      'red', 'green', 'yellow', 'salmo', 'pink'
+    ]
     this.state = {
-      backgroundColor: 'blue'
+      backgroundColor: 'blue',
+      availableColors,
+      DataSource: this.ds.cloneWithRows(availableColors)
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -28,13 +38,24 @@ export default class App extends React.Component {
     }) 
   }
   render() {
-    const { backgroundColor } = this.state 
+    const { backgroundColor, dataSource } = this.state 
     return (
       <ScrollView>
-      <View style={[
-         styles.container,
-        { backgroundColor }
-      ]}>
+      <ListView style={[
+          styles.container,
+          { backgroundColor }
+        ]}
+        dataSource={dataSource}
+        renderRow={(color) => (
+          <ColorButton 
+          backgroundColor={color}
+          onSelect={this.handleChange}
+          />
+        )}
+        renderHeader={() => (
+          <Text style={style.header}>Color List</Text>
+        )}
+        >
         <StatusBar hidden={true} />
         <Image style={styles.pic} source={picSierra} />
         <Text style={styles.defaultText}>
@@ -58,19 +79,8 @@ export default class App extends React.Component {
           }>
             Red
         </Text>
-        <TouchableHighlight 
-          style={styles.button}
-          onPress={() => this.handleChange('yellow')}
-          underlayColor='orange'>
-        <View style={styles.row}>
-          <View style={[
-            styles.sample,
-            {backgroundColor: 'yellow'}
-            ]} />
-          <Text style={styles.text}>yellow</Text>
-        </View>
-        </TouchableHighlight>
-      </View>
+        
+      </ListView>
       </ScrollView>
     )
   }
@@ -124,6 +134,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     margin: 5
+  },
+  header: {
+    backgroundColor: 'lightgrey',
+    paddingTop: 20,
+    padding: 10,
+    fontSize: 30,
+    textAlign: 'center'
   }
 })
 
