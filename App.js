@@ -9,8 +9,10 @@ import {
   ScrollView,
   TouchableHighlight
 } from 'react-native'
+
 import ListView from 'deprecate-react-native-listview'
 import ColorButton from './components/ColorButton'
+import ColorForm from './components/ColorForm'
 
 import picSierra from './assets/Sierra-Spencer.png'
 import picTanner from './assets/Tanner-McTab.png'
@@ -31,11 +33,22 @@ export default class App extends React.Component {
       DataSource: this.ds.cloneWithRows(availableColors)
     }
     this.handleChange = this.handleChange.bind(this)
+    this.newColor = this.newColor.bind(this)
   }
   handleChange(backgroundColor){
     this.setState({
          backgroundColor
     }) 
+  }
+  newColor(color){
+    const availableColors = [
+      ...this.state.availableColors,
+      color
+    ]
+    this.setState({
+      availableColors,
+      dataSource: this.ds.cloneWithRows(availableColors)
+    })
   }
   render() {
     const { backgroundColor, dataSource } = this.state 
@@ -54,6 +67,9 @@ export default class App extends React.Component {
         )}
         renderHeader={() => (
           <Text style={style.header}>Color List</Text>
+          <ColorForm 
+            onNewColor={this.newColor}
+          />
         )}
         >
         <StatusBar hidden={true} />
