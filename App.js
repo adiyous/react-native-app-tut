@@ -7,9 +7,9 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ScrollView,
-  TouchableHighlight,
-  ListView
+  TouchableHighlight
 } from 'react-native'
+import ListView from 'deprecate-react-native-listview'
 import ColorButton from './components/ColorButton'
 
 import picSierra from './assets/Sierra-Spencer.png'
