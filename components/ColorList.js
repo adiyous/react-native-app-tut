@@ -18,7 +18,10 @@ import ColorForm from './ColorForm'
 import picSierra from './assets/Sierra-Spencer.png'
 import picTanner from './assets/Tanner-McTab.png'
 
-export default class App extends React.Component {
+export default class ColorList extends React.Component {
+    static navigationOptions = {
+        title: 'Available Colors'
+    }
 //const App: () => React$Node = () => {
   constructor(){
     super()
@@ -73,6 +76,7 @@ export default class App extends React.Component {
     this.saveColors(availableColors)
   }
   render() {
+      const { navigate } = this.props.navigation
     const { backgroundColor, dataSource } = this.state 
     return (
       <ScrollView>
@@ -85,7 +89,8 @@ export default class App extends React.Component {
           <ColorButton 
             backgroundColor={color}
             // onSelect={this.handleChange}
-            onSelect={this.props.onColorSelected}
+            // onSelect={this.props.onColorSelected}
+            onSelect={() => navigate('details'. {color})}
           />
         )}
         renderHeader={() => (

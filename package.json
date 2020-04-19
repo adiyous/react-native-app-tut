@@ -10,9 +10,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "color": "^3.1.2",
     "deprecated-react-native-listview": "0.0.6",
     "react": "16.11.0",
-    "react-native": "0.62.1"
+    "react-native": "0.62.1",
+    "react-navigation": "^4.3.7"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
