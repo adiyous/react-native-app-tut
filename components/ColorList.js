@@ -94,10 +94,13 @@ export default class ColorList extends React.Component {
           />
         )}
         renderHeader={() => (
+        <View>
           <Text style={style.header}>Color List</Text>
           <ColorForm 
             onNewColor={this.newColor}
+            navigation={this.props.navigation}
           />
+          </View>
         )}
         >
         <StatusBar hidden={true} />
